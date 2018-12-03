@@ -11,6 +11,7 @@ using Napi::Object;
 using Napi::Persistent;
 using Napi::String;
 using Napi::TypeError;
+using Napi::Boolean;
 using Napi::Value;
 
 FunctionReference USDTProbe::constructor;
@@ -44,12 +45,12 @@ Object USDTProbe::Init(Napi::Env env, Object exports) {
 Value USDTProbe::Fire(const CallbackInfo& args) {
   Napi::Env env = args.Env();
   if (probeIsEnabled(probe_) == 0) {
-    return env.False();
+    return Boolean::New(env, false);
   }
 
   if (args.Length() != argc_) {
     // TODO(mmarchini) throw TypeError
-    return env.False();
+    return Boolean::New(env, false);
   }
 
   void *argv[MAX_ARGUMENTS];
@@ -63,7 +64,7 @@ Value USDTProbe::Fire(const CallbackInfo& args) {
       argv[i] = reinterpret_cast<void *>(args[i].As<Number>().Uint32Value());
     } else {
       // TODO(mmarchini) Throw TypeError
-      return env.False();
+      return Boolean::New(env, false);
     }
   }
 
@@ -98,6 +99,6 @@ Value USDTProbe::Fire(const CallbackInfo& args) {
     }
   }
 
-  return env.True();
+  return Boolean::New(env, true);
 }
 } // namespace usdt
