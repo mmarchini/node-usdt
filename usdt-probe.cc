@@ -17,7 +17,7 @@ FunctionReference USDTProbe::constructor;
 
 
 USDTProbe::USDTProbe(const CallbackInfo& args)
-    : ObjectWrap<USDTProvider>(args),
+    : ObjectWrap<USDTProbe>(args),
       argc_(0),
       probe_(nullptr) {};
 
@@ -31,7 +31,7 @@ Object USDTProbe::Init(Napi::Env env, Object exports) {
   Function func = DefineClass(
       env, "USDTProbe",
       {
-          InstanceMethod("fire", &USDTProbe::fire),
+          InstanceMethod("fire", &USDTProbe::Fire),
       });
 
   constructor = Persistent(func);
