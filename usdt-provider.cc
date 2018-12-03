@@ -1,6 +1,18 @@
 #include "usdt.h"
 
 namespace usdt {
+
+using Napi::CallbackInfo;
+using Napi::Function;
+using Napi::FunctionReference;
+using Napi::HandleScope;
+using Napi::Object;
+using Napi::ObjectReference;
+using Napi::Persistent;
+using Napi::String;
+using Napi::TypeError;
+using Napi::Value;
+
 FunctionReference USDTProvider::constructor;
 
 USDTProvider::USDTProvider(const CallbackInfo& args)

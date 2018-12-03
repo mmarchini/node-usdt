@@ -1,6 +1,18 @@
 #include "usdt.h"
 
 namespace usdt {
+
+using Napi::CallbackInfo;
+using Napi::Function;
+using Napi::FunctionReference;
+using Napi::HandleScope;
+using Napi::Number;
+using Napi::Object;
+using Napi::Persistent;
+using Napi::String;
+using Napi::TypeError;
+using Napi::Value;
+
 FunctionReference USDTProbe::constructor;
 
 
