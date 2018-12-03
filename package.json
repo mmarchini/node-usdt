@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/sthima/node-usdt#readme",
   "dependencies": {
-    "nan": "*"
+    "nan": "*",
+    "node-addon-api": "^1.6.2"
   }
 }

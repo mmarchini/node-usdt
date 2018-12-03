@@ -1,59 +1,40 @@
-#include <nan.h>
-#include <node_object_wrap.h>
+#include <napi.h>
 
 extern "C" {
 #include <libstapsdt.h>
 }
 
-#include <errno.h>
-#include <string.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <unistd.h>
+namespace usdt {
+class USDTProbe : public Napi::ObjectWrap<USDTProbe> {
+ public:
+  static Napi::Object Init(Napi::Env env, Napi::Object exports);
+  static Napi::FunctionReference constructor;
+  USDTProbe(const Napi::CallbackInfo& args);
+  ~USDTProbe();
 
-namespace node {
-
-using namespace v8;
-
-class USDTProbe : public Nan::ObjectWrap {
-
-public:
-  static void Initialize(v8::Local<v8::Object> target);
+ private:
   SDTProbe_t *probe;
   ArgType_t arguments[MAX_ARGUMENTS];
   size_t argc;
 
-  static NAN_METHOD(New);
-  static NAN_METHOD(Fire);
+  Napi::Value Fire(const Napi::CallbackInfo& args);
 
-  v8::Local<Value> _fire(Nan::NAN_METHOD_ARGS_TYPE, size_t);
-
-  static Nan::Persistent<FunctionTemplate> constructor_template;
-
-  USDTProbe();
-  ~USDTProbe();
-private:
+  // v8::Local<Value> _fire(Nan::NAN_METHOD_ARGS_TYPE, size_t);
 };
 
-class USDTProvider : public Nan::ObjectWrap {
+class USDTProvider : public Nan::ObjectWrap<USDTProvider> {
 
-public:
-  static void Initialize(v8::Local<v8::Object> target);
-  SDTProvider_t *provider;
-
-  static NAN_METHOD(New);
-  static NAN_METHOD(AddProbe);
-  // static NAN_METHOD(RemoveProbe);
-  static NAN_METHOD(Enable);
-  static NAN_METHOD(Disable);
-  // static NAN_METHOD(Fire);
-
-  USDTProvider();
+ public:
+  static Napi::Object Init(Napi::Env env, Napi::Object exports);
+  static Napi::FunctionReference constructor;
+  USDTProvider(const Napi::CallbackInfo& args);
   ~USDTProvider();
-private:
-  static Nan::Persistent<FunctionTemplate> constructor_template;
+
+ private:
+  SDTProvider_t *provider_;
+
+  Napi::Value AddProbe(const Napi::CallbackInfo& args);
+  Napi::Value Enable(const Napi::CallbackInfo& args);
+  Napi::Value Disable(const Napi::CallbackInfo& args);
 };
-
-void InitUSDTProvider(v8::Local<v8::Object> target);
-
 };

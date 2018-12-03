@@ -1,5 +1,6 @@
-const binding = require('./build/Release/usdt');
+'use strict';
 
-USDTProvider = binding.USDTProvider;
+const binding = require('./build/Release/usdt');
+const USDTProvider = binding.USDTProvider;
 
 exports.USDTProvider = USDTProvider;
