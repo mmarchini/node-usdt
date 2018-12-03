@@ -56,7 +56,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
   USDTProbe* probe = ObjectWrap<USDTProbe>::Unwrap(probe_obj);
 
   // TODO(mmarchini) validate args len <= MAX_ARGUMENTS
-  probe->argc = std::min(MAX_ARGUMENTS, args.Length());
+  probe->argc = std::min(static_cast<size_t>(MAX_ARGUMENTS), args.Length());
   for (unsigned int i = 0; i < probe->argc; i++) {
     std::string type = args[i + 1].As<String>();
 
