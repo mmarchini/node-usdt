@@ -59,7 +59,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
 
   // TODO(mmarchini) validate args len <= MAX_ARGUMENTS
   probe->argc = std::min(MAX_ARGUMENTS, args.Length());
-  for (int i = 0; i < probe->argc; i++) {
+  for (unsigned int i = 0; i < probe->argc; i++) {
     std::string type = args[i + 1].As<String>();
 
     switch {
@@ -77,7 +77,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
 
   switch (probe->argc) {
     case 6:
-      probe->probe = providerAddProbe(provider_, probe_name, probe->argc,
+      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2],
@@ -87,7 +87,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
       );
       break;
     case 5:
-      probe->probe = providerAddProbe(provider_, probe_name, probe->argc,
+      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2],
@@ -96,7 +96,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
       );
       break;
     case 4:
-      probe->probe = providerAddProbe(provider_, probe_name, probe->argc,
+      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2],
@@ -104,26 +104,26 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
       );
       break;
     case 3:
-      probe->probe = providerAddProbe(provider_, probe_name, probe->argc,
+      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2]
       );
       break;
     case 2:
-      probe->probe = providerAddProbe(provider_, probe_name, probe->argc,
+      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1]
       );
       break;
     case 1:
-      probe->probe = providerAddProbe(provider_, probe_name, probe->argc,
+      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0]
       );
       break;
     case 0:
     default:
-      probe->probe = providerAddProbe(provider->provider, *name, probe->argc);
+      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc);
       break;
   }
 
@@ -131,23 +131,24 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
 }
 
 Value USDTProvider::Enable(const CallbackInfo& args) {
+  Napi::Env env = args.Env();
   if (providerLoad(provider_) != 0) {
     // TODO (mmarchini) get error string from libstapsdt
     // TODO (mmarchini) throw error
     // ThrowError("Unable to load provider");
-    return;
+    return env.Null();
   }
 
-  return;
+  return env.Null();
 }
 
 Value USDTProvider::Enable(const CallbackInfo& args) {
   if (providerUnload(provider_) != 0) {
     // TODO (mmarchini) throw error
     // ThrowError("Unable to unload provider");
-    return;
+    return env.Null();
   }
 
-  return;
+  return env.Null();
 }
-}
+};
