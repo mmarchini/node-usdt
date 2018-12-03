@@ -62,7 +62,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
   for (unsigned int i = 0; i < probe->argc; i++) {
     std::string type = args[i + 1].As<String>();
 
-    switch {
+    switch (type) {
       case "char *":
         probe->arguments[i] = uint64;
         break;
