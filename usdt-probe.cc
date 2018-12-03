@@ -18,8 +18,8 @@ FunctionReference USDTProbe::constructor;
 
 USDTProbe::USDTProbe(const CallbackInfo& args)
     : ObjectWrap<USDTProbe>(args),
-      argc_(0),
-      probe_(nullptr) {};
+      probe_(nullptr),
+      argc_(0) {};
 
 USDTProbe::~USDTProbe() {
   probe_ = nullptr;
@@ -41,7 +41,7 @@ Object USDTProbe::Init(Napi::Env env, Object exports) {
   return exports;
 }
 
-Value USDTProvider::Fire(const CallbackInfo& args) {
+Value USDTProbe::Fire(const CallbackInfo& args) {
   Napi::Env env = args.Env();
   if (probeIsEnabled(probe_) == 0) {
     return env.False();
