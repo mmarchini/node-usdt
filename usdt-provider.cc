@@ -56,68 +56,68 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
   USDTProbe* probe = ObjectWrap<USDTProbe>::Unwrap(probe_obj);
 
   // TODO(mmarchini) validate args len <= MAX_ARGUMENTS
-  probe->argc = std::min(static_cast<size_t>(MAX_ARGUMENTS), args.Length());
-  for (unsigned int i = 0; i < probe->argc; i++) {
+  probe->argc_ = std::min(static_cast<size_t>(MAX_ARGUMENTS), args.Length());
+  for (unsigned int i = 0; i < probe->argc_; i++) {
     std::string type = args[i + 1].As<String>();
 
     if (type == "char *") {
-      probe->arguments[i] = uint64;
+      probe->arguments_[i] = uint64;
     } else if (type == "int") {
-      probe->arguments[i] = int32;
+      probe->arguments_[i] = int32;
     } else {
-      probe->arguments[i] = uint64;
+      probe->arguments_[i] = uint64;
     }
   }
 
-  switch (probe->argc) {
+  switch (probe->argc_) {
     case 6:
-      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
-        probe->arguments[0],
-        probe->arguments[1],
-        probe->arguments[2],
-        probe->arguments[3],
-        probe->arguments[4],
-        probe->arguments[5]
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc_,
+        probe->arguments_[0],
+        probe->arguments_[1],
+        probe->arguments_[2],
+        probe->arguments_[3],
+        probe->arguments_[4],
+        probe->arguments_[5]
       );
       break;
     case 5:
-      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
-        probe->arguments[0],
-        probe->arguments[1],
-        probe->arguments[2],
-        probe->arguments[3],
-        probe->arguments[4]
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc_,
+        probe->arguments_[0],
+        probe->arguments_[1],
+        probe->arguments_[2],
+        probe->arguments_[3],
+        probe->arguments_[4]
       );
       break;
     case 4:
-      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
-        probe->arguments[0],
-        probe->arguments[1],
-        probe->arguments[2],
-        probe->arguments[3]
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc_,
+        probe->arguments_[0],
+        probe->arguments_[1],
+        probe->arguments_[2],
+        probe->arguments_[3]
       );
       break;
     case 3:
-      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
-        probe->arguments[0],
-        probe->arguments[1],
-        probe->arguments[2]
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc_,
+        probe->arguments_[0],
+        probe->arguments_[1],
+        probe->arguments_[2]
       );
       break;
     case 2:
-      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
-        probe->arguments[0],
-        probe->arguments[1]
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc_,
+        probe->arguments_[0],
+        probe->arguments_[1]
       );
       break;
     case 1:
-      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
-        probe->arguments[0]
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc_,
+        probe->arguments_[0]
       );
       break;
     case 0:
     default:
-      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc);
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc_);
       break;
   }
 

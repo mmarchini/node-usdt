@@ -32,8 +32,8 @@ class USDTProbe : public Napi::ObjectWrap<USDTProbe> {
  private:
   friend USDTProvider;
   SDTProbe_t *probe_;
-  ArgType_t arguments[MAX_ARGUMENTS];
-  size_t argc;
+  ArgType_t arguments_[MAX_ARGUMENTS];
+  size_t argc_;
 
   Napi::Value Fire(const Napi::CallbackInfo& args);
 };

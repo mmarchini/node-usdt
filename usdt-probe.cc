@@ -47,7 +47,7 @@ Value USDTProvider::Fire(const CallbackInfo& args) {
     return env.False();
   }
 
-  if (args.Length() != argc) {
+  if (args.Length() != argc_) {
     // TODO(mmarchini) throw TypeError
     return env.False();
   }
@@ -55,7 +55,7 @@ Value USDTProvider::Fire(const CallbackInfo& args) {
   void *argv[MAX_ARGUMENTS];
 
   // convert each argument value
-  for (size_t i = 0; i < argc; i++) {
+  for (size_t i = 0; i < argc_; i++) {
     if (args[i].IsString()) {
       std::string s = args[i].As<String>();
       argv[i] = static_cast<void *>(strdup(s.c_str()));
@@ -67,7 +67,7 @@ Value USDTProvider::Fire(const CallbackInfo& args) {
     }
   }
 
-  switch(argc) {
+  switch(argc_) {
     case 6:
       probeFire(probe_, argv[0], argv[1], argv[2], argv[3], argv[4], argv[5]);
       break;
@@ -92,7 +92,7 @@ Value USDTProvider::Fire(const CallbackInfo& args) {
       break;
   }
 
-  for (size_t i = 0; i < argc; i++) {
+  for (size_t i = 0; i < argc_; i++) {
     if (args[i].IsString()) {
       free(argv[i]);
     }
