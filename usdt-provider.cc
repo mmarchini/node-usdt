@@ -139,6 +139,7 @@ Value USDTProvider::Enable(const CallbackInfo& args) {
 }
 
 Value USDTProvider::Disable(const CallbackInfo& args) {
+  Napi::Env env = args.Env();
   if (providerUnload(provider_) != 0) {
     // TODO (mmarchini) throw error
     // ThrowError("Unable to unload provider");
