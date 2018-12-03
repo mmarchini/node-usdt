@@ -31,7 +31,7 @@ class USDTProbe : public Napi::ObjectWrap<USDTProbe> {
 
  private:
   friend USDTProvider;
-  SDTProbe_t *probe;
+  SDTProbe_t *probe_;
   ArgType_t arguments[MAX_ARGUMENTS];
   size_t argc;
 

@@ -19,7 +19,7 @@ FunctionReference USDTProbe::constructor;
 USDTProbe::USDTProbe(const CallbackInfo& args)
     : ObjectWrap<USDTProvider>(args),
       argc_(0),
-      probe_(nullptr);
+      probe_(nullptr) {};
 
 USDTProbe::~USDTProbe() {
   probe_ = nullptr;
