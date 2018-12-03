@@ -55,8 +55,6 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
   Object probe_obj = USDTProbe::constructor.New({});
   USDTProbe* probe = ObjectWrap<USDTProbe>::Unwrap(probe_obj);
 
-  this->Set(probe_name, probe);
-
   // TODO(mmarchini) validate args len <= MAX_ARGUMENTS
   probe->argc = std::min(MAX_ARGUMENTS, args.Length());
   for (unsigned int i = 0; i < probe->argc; i++) {
