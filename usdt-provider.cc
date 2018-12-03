@@ -21,7 +21,7 @@ USDTProvider::USDTProvider(const CallbackInfo& args)
   std::string provider_name = args[0].As<String>();
   if ((provider_ = providerInit(provider_name.c_str())) == nullptr) {
     // TODO(mmarchini) Throw error
-    // Nan::ThrowError("providerInit failed");
+    // ThrowError("providerInit failed");
     return;
   }
 }
@@ -131,7 +131,7 @@ Value USDTProvider::Enable(const CallbackInfo& args) {
   if (providerLoad(provider_) != 0) {
     // TODO (mmarchini) get error string from libstapsdt
     // TODO (mmarchini) throw error
-    // Nan::ThrowError("Unable to load provider");
+    // ThrowError("Unable to load provider");
     return;
   }
 
@@ -141,7 +141,7 @@ Value USDTProvider::Enable(const CallbackInfo& args) {
 Value USDTProvider::Enable(const CallbackInfo& args) {
   if (providerUnload(provider_) != 0) {
     // TODO (mmarchini) throw error
-    // Nan::ThrowError("Unable to unload provider");
+    // ThrowError("Unable to unload provider");
     return;
   }
 

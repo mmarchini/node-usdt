@@ -1,3 +1,4 @@
+#pragma once
 #include <napi.h>
 
 extern "C" {
@@ -18,11 +19,9 @@ class USDTProbe : public Napi::ObjectWrap<USDTProbe> {
   size_t argc;
 
   Napi::Value Fire(const Napi::CallbackInfo& args);
-
-  // v8::Local<Value> _fire(Nan::NAN_METHOD_ARGS_TYPE, size_t);
 };
 
-class USDTProvider : public Nan::ObjectWrap<USDTProvider> {
+class USDTProvider : public Napi::ObjectWrap<USDTProvider> {
 
  public:
   static Napi::Object Init(Napi::Env env, Napi::Object exports);
