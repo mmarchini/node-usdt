@@ -71,7 +71,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
 
   switch (probe->argc) {
     case 6:
-      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2],
@@ -81,7 +81,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
       );
       break;
     case 5:
-      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2],
@@ -90,7 +90,7 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
       );
       break;
     case 4:
-      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2],
@@ -98,26 +98,26 @@ Value USDTProvider::AddProbe(const CallbackInfo& args) {
       );
       break;
     case 3:
-      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1],
         probe->arguments[2]
       );
       break;
     case 2:
-      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0],
         probe->arguments[1]
       );
       break;
     case 1:
-      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc,
         probe->arguments[0]
       );
       break;
     case 0:
     default:
-      probe->probe = providerAddProbe(provider_, probe_name.c_str(), probe->argc);
+      probe->probe_ = providerAddProbe(provider_, probe_name.c_str(), probe->argc);
       break;
   }
 
